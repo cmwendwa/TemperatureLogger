@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+
+
+{% load temperature %}
+
+{% block title %}{{ 'Temperature Time series' }}{% endblock %}
+
+{% block header %}
+     <div class="row">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6"><h1>Temperature-Time Graph</h1></canvas></div>
+  <div class="col-sm-3"></div>
+  </div>
+{% endblock %}
+
+{% block content %}
+    <div class="chart-temperature">
+
+  <div class="row">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6"><canvas id="myChart"></canvas></div>
+  <div class="col-sm-3"></div>
+</div>
+
+<canvas id="myChart"></canvas>
+<script>
+var  mylabels  = {% get_temperature_times %}
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+   
+  type: 'line',
+  data: {
+    labels: {% get_temperature_times %},
+    datasets: [{
+      label: 'Temperature',
+      data: {% get_temperature_values %},
+      backgroundColor: '#666'
+    }]
+  },
+
+   options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: {% get_min_temperature_value %},
+                     
+                }
+            }]
+        }
+        }
+ 
+});
+
+
+
+</script>
+
+    </div>
+    
+{% endblock %}
