@@ -1,12 +1,15 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.utils.translation import gettext as _
-# Create your models here.
+
+
 
 
 
 class TemperatureLog(models.Model):
     timestamp = models.DateTimeField(_("timestamp"),)
-    temperature = temperature = models.IntegerField(_("temperature (C°)"),)
+    temperature = models.IntegerField(_("temperature (C°)"),)
     
     class Meta:
         verbose_name=_("temperature log")
